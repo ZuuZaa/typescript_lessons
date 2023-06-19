@@ -19,6 +19,8 @@ let arr4 = ['hey', 'hello', false, 87];
 let arr3 = ['hey', 19, true];
 // arr3 = arr2 
 arr2 = arr3;
+const names = ["Dylan"];
+//names.push("Jack"); // Error: Property 'push' does not exist on type 'readonly string[]'.
 const obj1 = {
     name: 'zumrud',
     age: 40,
@@ -138,3 +140,83 @@ console.log(yearSpan, currentYear);
 yearSpan.setAttribute('date', currentYear);
 yearSpan.textContent = currentYear;
 // --------- CLASSES --------------
+const das = JSON.parse("55");
+console.log(das);
+class Coder {
+    constructor(name, age, music, lang = 'Typescript') {
+        this.name = name;
+        this.age = age;
+        this.music = music;
+        this.lang = lang;
+        this.getAge = () => `${this.name.toUpperCase()} is ${this.age} years old.`;
+        this.name = name;
+        this.age = age;
+        this.music = music;
+        this.lang = lang;
+    }
+}
+const coderZ = new Coder('zumrud', 39, 'jazz');
+console.log(coderZ.getAge());
+// console.log(coderZ.age)
+// console.log(coderZ.lang)
+class WebDev extends Coder {
+    constructor(computer, name, music, age) {
+        super(name, age, music);
+        this.computer = computer;
+        this.getLanguage = () => console.log(`i type ${this.lang}`);
+        this.computer = computer;
+    }
+}
+const webDevZ = new WebDev("macpro", "royal", "meyxana", 30);
+webDevZ.getLanguage();
+class Drummer {
+    constructor(name, instrument) {
+        this.name = name;
+        this.instrument = instrument;
+    }
+    play(action) {
+        console.log(`${this.name} ${action} the ${this.instrument}`);
+    }
+}
+const Page = new Drummer("jimmy", "darbuka");
+Page.play("strums");
+/////////////////////////////////////////////////
+class Peeps {
+    static getCount() {
+        return Peeps.count; // because count is static 
+    }
+    constructor(name) {
+        this.name = name;
+        this.name = name;
+        this.id = ++Peeps.count;
+    }
+}
+Peeps.count = 0;
+const victoria = new Peeps("victoria");
+const steve = new Peeps("steve");
+const olivia = new Peeps("olivia");
+console.log(Peeps.count);
+console.log(steve.id);
+///////////////////////////////
+class Bands {
+    constructor() {
+        this.dataState = [];
+    }
+    get data() {
+        return this.dataState;
+    }
+    set data(value) {
+        if (Array.isArray(value) && value.every(element => typeof element === 'string')) {
+            this.dataState = value;
+            return; // setter cannot return a value 
+        }
+        else
+            throw new Error("Param is not an array of strings");
+    }
+}
+const myBand = new Bands();
+myBand.data = ['neil young', 'led zep'];
+console.log(myBand.data);
+myBand.data = [...myBand.data, "ZZ top"];
+console.log(myBand.data);
+//myBand. data = ['zumrud', 13]
